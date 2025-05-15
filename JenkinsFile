@@ -6,25 +6,24 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-                echo "Build started and completed!"
-                bat 'java -version'
+                echo "Building..."
+            }
+            post{
+                always{
+                    mail to: "pawarjay1611@gmail.com",
+                    subject: "Build status email",
+                    body: "Build was successful!"
+                }
             }
         }
         stage('Test'){
             steps{
-                echo "Test started and completed!"
+                echo "Testing..."
             }
         }
         stage('Deploy'){
             steps{
-                // retry(32){
-                //     echo 'Deployment started and completed'
-                // }
-                bat 'echo %NAME%, Deployment is done!'
-                // timeout(time: 3, unit: 'SECONDS')
-                // {
-                //     sleep 5
-                // }
+                echo "Deploying..."
             }
         }
     }
