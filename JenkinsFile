@@ -1,0 +1,16 @@
+pipeline{
+    agent anystages{
+        stage("Build"){
+            steps{
+                echo "Building..."
+            }
+            post{
+                success{
+                    mail to: "pawarjay1611@gmail.com",
+                    subject: "Build status email",
+                    body: "Build was successful!"
+                }
+            }
+        }
+    }
+}
